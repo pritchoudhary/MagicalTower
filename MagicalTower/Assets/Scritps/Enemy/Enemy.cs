@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     //Starting health of the enemy
     [SerializeField] private float _initalHealth;
 
+    private Transform _towerTransform;
     private IMovement _movement;
     private IHealth _health;
 
@@ -18,12 +19,21 @@ public class Enemy : MonoBehaviour
         //Initalizes the health component
         if (TryGetComponent(out _health))
             _health.Health = _initalHealth;
+
+        _towerTransform = FindObjectOfType<Tower>().transform;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Moves the enemy towards a target position each frame.
+        if(_towerTransform != null)
+            MoveTowardsTower();
+    }
+
+    private void MoveTowardsTower()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _towerTransform.position, _speed *Time.deltaTime);
     }
 
     //Method to apply damage to the enemy
