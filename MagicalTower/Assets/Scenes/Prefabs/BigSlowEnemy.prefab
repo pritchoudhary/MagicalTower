@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2260835802242576679}
   - component: {fileID: 3314856318410721243}
   - component: {fileID: 167055145736973376}
+  - component: {fileID: 4986254287017084920}
+  - component: {fileID: 5032858628078944753}
   m_Layer: 0
   m_Name: BigSlowEnemy
   m_TagString: Untagged
@@ -112,3 +114,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2.5
   _initalHealth: 100
+--- !u!114 &4986254287017084920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5057543598554657908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2e8ff04f040cc40b5f29941bd9ff57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5032858628078944753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5057543598554657908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70990233995d5174b8872e4227719337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

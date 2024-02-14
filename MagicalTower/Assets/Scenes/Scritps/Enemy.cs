@@ -31,4 +31,14 @@ public class Enemy : MonoBehaviour
     {
         _health?.TakeDamage(damage);
     }
+
+    public void Initialize()
+    {
+        if (_health != null)
+            _health.Health = _initalHealth;
+
+        gameObject.SetActive(true);
+
+
+    }
 }
