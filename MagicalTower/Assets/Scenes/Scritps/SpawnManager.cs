@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 //Struct to hold information about each spwan
@@ -7,7 +6,6 @@ using UnityEngine;
 public struct SpawnInfo
 {
     public int TypeIndex; //index of the enemy type to spawn
-    public Vector3 Position;
     public float Delay; //Delay before the next spawn
 }
 
@@ -16,6 +14,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private EnemyFactory _enemyFactory;
     [SerializeField] private SpawnPattern _spawnPattern; //Reference to a scriptable object that defines the spawn rates and patterns
+    [SerializeField] private Transform _floorTransform; //Reference to the floor of the level to get the bounds
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +25,17 @@ public class SpawnManager : MonoBehaviour
     //Coroutine to handle the spawning of enemies
     private IEnumerator SpawnRoutine()
     {
+        Bounds floorBounds = _floorTransform.GetComponent<MeshRenderer>().bounds;
+
         while (true)
         {
             SpawnInfo spawnInfo = _spawnPattern.GetNextSpawn();
+            //Generate random position within the floor bounds
+            Vector3 randomPosition = new(Random.Range(floorBounds.min.x, floorBounds.max.x), _floorTransform.position.y, Random.Range(floorBounds.min.z,floorBounds.max.z));
             yield return new WaitForSeconds(spawnInfo.Delay); //Wait for specified delay before spawning the next enemy
 
-            //Spawn enemy using the factory
-            var enemy = _enemyFactory.GetEnemy(spawnInfo.TypeIndex, spawnInfo.Position, Quaternion.identity);
+            
+            _enemyFactory.GetEnemy(spawnInfo.TypeIndex, randomPosition, Quaternion.identity);
         }
     }
 }
