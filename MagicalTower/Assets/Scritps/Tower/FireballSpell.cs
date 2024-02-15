@@ -3,12 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FireballSpell", menuName = "Spells/Fireball")]
 public class FireballSpell : Spell
 {
-    [SerializeField] private float _damage;
-    [SerializeField] private float _projectileSpeed;
-    [SerializeField] private float _explosionRadius;
-    [SerializeField] private float _gravity = 9.81f;
-    [SerializeField] private float _launchAngle = 45f;
-
     //Casts a spell towards a random direction
     public override void CastSpell(Vector3 spawnPosition, Transform target = null)
     {

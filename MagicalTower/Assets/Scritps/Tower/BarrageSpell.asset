@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3625075b0ae46a54f91a6ed49905bf1a, type: 3}
-  m_Name: FireballSpell
+  m_Script: {fileID: 11500000, guid: a91c2b8d0b052ee408c1c55ae9c25716, type: 3}
+  m_Name: BarrageSpell
   m_EditorClassIdentifier: 
-  _coolDown: 4
-  _projectilePrefab: {fileID: 8521791475417942964, guid: 130ce074789e71b4696545e5fd101236, type: 3}
-  _requiresTarget: 0
+  _coolDown: 3
+  _projectilePrefab: {fileID: 3589048025490249911, guid: bdbbfde29473eb643886b421545f88f0, type: 3}
+  _requiresTarget: 1
   _gravity: 9.81
   _launchAngle: 45
-  _explosionRadius: 5
-  _damage: 20
-  _projectileSpeed: 10
+  _explosionRadius: 10
+  _damage: 5
+  _projectileSpeed: 20

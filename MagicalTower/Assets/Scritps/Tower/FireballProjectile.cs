@@ -20,7 +20,13 @@ public class FireballProjectile : Projectile
 
     protected override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
-        //Implement explosion logic
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (other.gameObject.TryGetComponent<EnemyHealthSystem>(out var enemyHealthSystem))
+                enemyHealthSystem.TakeDamage(_damage);
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.CompareTag("Floor"))
+            Destroy(gameObject); //Destroy the projectile after hitting the target
     }
 }

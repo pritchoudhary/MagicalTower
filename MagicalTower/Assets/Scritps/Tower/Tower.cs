@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Tower : MonoBehaviour
 {
     [SerializeField] private List<Spell> _spells;
     private readonly Dictionary<Spell, float> _spellCooldowns = new();
+    private bool _isCasting = false;
 
     private void Start()
     {
@@ -18,16 +20,28 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
+        if (_isCasting)
+            return; //Skip update if already casting a spell
+
         foreach (var spell in _spells)
         {
             _spellCooldowns[spell] -= Time.deltaTime; //Update cooldown timers
 
-            if (_spellCooldowns[spell] <= 0 )
+            if (_spellCooldowns[spell] <= 0 && GetAllVisibleTargets().GetEnumerator().MoveNext()) //check if the cool down is done and there are visible targets
             {
-                CastSpell(spell);
+                StartCoroutine(CastSpellRoutine(spell));
                 _spellCooldowns[spell] = spell._coolDown; //Reset cooldown timer
+                break; //Ensure only one spell is cast at a time
             }
         }
+    }
+
+    private IEnumerator CastSpellRoutine(Spell spell)
+    {
+        _isCasting = true;
+        CastSpell(spell);
+        yield return new WaitForSeconds(spell._coolDown);
+        _isCasting = false;
     }
 
     private void CastSpell(Spell spell)
@@ -49,8 +63,7 @@ public class Tower : MonoBehaviour
 
     private IEnumerable<Transform> GetAllVisibleTargets()
     {
-        //Implement enemy detection logic
-        //placeholder for now
-        return new List<Transform>();
+        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            yield return enemy.transform;
     }
 }

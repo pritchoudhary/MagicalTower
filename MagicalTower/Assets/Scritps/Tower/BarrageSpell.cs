@@ -3,14 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BarrageSpell", menuName = "Spells/Barrage")]
 public class BarrageSpell : Spell
 {
-    [SerializeField] private float _damage;
-    [SerializeField] private float _projectileSpeed;
-
     //Casts a barrage spell for each target visible on the screen
-    public override void CastSpell(Vector3 spawnPosition, Transform target)
+    public override void CastSpell(Vector3 spawnPosition, Transform target = null)
     {
-        var projectileInstance = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
-        var barrage = projectileInstance.GetComponent<BarrageProjectile>();
-        barrage.Initialize(_damage, _projectileSpeed,target);
+        foreach(var enemy in GameObject.FindGameObjectsWithTag("Enemy")) 
+        {
+            var projectileInstance = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
+            var barrage = projectileInstance.GetComponent<BarrageProjectile>();
+
+            Rigidbody enemyRigidbody = enemy.GetComponent<Rigidbody>();
+            Vector3 enemyVelocity = enemyRigidbody != null ? enemyRigidbody.velocity : Vector3.zero;
+
+            Vector3 velocity = ProjectileArcUtility.CalculateArcVelocity(spawnPosition, enemy.transform.position, _launchAngle, _gravity);
+            barrage.Initialize(_damage, velocity, enemy.transform, enemyVelocity);
+        }
+
     }
 }
