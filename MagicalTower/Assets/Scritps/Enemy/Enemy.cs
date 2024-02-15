@@ -6,8 +6,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed;
     //Starting health of the enemy
     [SerializeField] private float _initalHealth;
+    [SerializeField] private float _damageApplied;
 
     private Transform _towerTransform;
+    private TowerHealth _towerHealth;
     private IMovement _movement;
     private IHealth _health;
 
@@ -21,6 +23,7 @@ public class Enemy : MonoBehaviour
             _health.Health = _initalHealth;
 
         _towerTransform = FindObjectOfType<Tower>().transform;
+        _towerHealth = FindObjectOfType<TowerHealth>();
     }
 
     // Update is called once per frame
@@ -49,6 +52,13 @@ public class Enemy : MonoBehaviour
 
         gameObject.SetActive(true);
 
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Tower"))
+        {
+            _towerHealth.TakeDamage(_damageApplied);
+        }
     }
 }

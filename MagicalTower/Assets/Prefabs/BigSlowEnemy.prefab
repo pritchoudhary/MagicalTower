@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1.5
   _initalHealth: 100
+  _damageApplied: 10
 --- !u!114 &4986254287017084920
 MonoBehaviour:
   m_ObjectHideFlags: 0

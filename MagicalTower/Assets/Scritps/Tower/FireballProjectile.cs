@@ -14,6 +14,10 @@ public class FireballProjectile : Projectile
             rigidbody = gameObject.AddComponent<Rigidbody>();
         }
 
+
+        //Add check for invalid velocity
+        if (float.IsNaN(rigidbody.velocity.x) || float.IsNaN(rigidbody.velocity.y) || float.IsNaN(rigidbody.velocity.z)) { return; }
+
         rigidbody.useGravity = true;
         rigidbody.velocity = ProjectileArcUtility.CalculateArcVelocity(transform.position, targetPosition, launchAngle, gravity);
     }
