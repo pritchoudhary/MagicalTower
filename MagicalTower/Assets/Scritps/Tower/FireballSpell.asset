@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3625075b0ae46a54f91a6ed49905bf1a, type: 3}
   m_Name: FireballSpell
   m_EditorClassIdentifier: 
-  _coolDown: 4
+  _coolDown: 15
   _projectilePrefab: {fileID: 8521791475417942964, guid: 130ce074789e71b4696545e5fd101236, type: 3}
   _damage: 20
-  _projectileSpeed: 4
-  _explosionRadius: 4
+  _projectileSpeed: 10
+  _explosionRadius: 5

@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
 {
     protected float _speed;
     protected float _damage;
+    protected float _explosionRadius;
 
     protected virtual void Update()
     {

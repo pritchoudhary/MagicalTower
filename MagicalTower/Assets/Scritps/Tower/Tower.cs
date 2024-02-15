@@ -32,19 +32,19 @@ public class Tower : MonoBehaviour
 
     private void CastSpell(Spell spell)
     {
-        if(spell is FireballSpell)
-        {
-            //Fireball doesn't need a specific target
-            spell.CastSpell(transform.position);
-        }
-        else if(spell is BarrageSpell)
+        if(spell._requiresTarget)
         {
             //Cast barrage for each visible enemy
-            foreach(var target in GetAllVisibleTargets())
+            foreach (var target in GetAllVisibleTargets())
             {
                 spell.CastSpell(transform.position, target);
             }
         }
+        else
+        {
+            spell.CastSpell(transform.position);
+        }
+        
     }
 
     private IEnumerable<Transform> GetAllVisibleTargets()
